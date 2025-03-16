@@ -1,0 +1,5 @@
+databaseChangeLog:
+  - include:
+      file: classpath:/changelog/db/changesets/001-create-table-limits.yaml
+  - include:
+      file: classpath:/changelog/db/changesets/002-migrate-data.yaml
