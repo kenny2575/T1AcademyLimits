@@ -1,1 +1,6 @@
-spring.application.name=T1AcademyLimits
+spring:
+  application.name: T1AcademyLimits
+application:
+  limits:
+    amount: 10000
+    renew: "0 12 15 * * *"
