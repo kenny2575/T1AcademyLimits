@@ -1,3 +1,7 @@
+application:
+  limits:
+    amount: 10000
+    renew: "0 12 15 * * *"
 spring:
   application.name: T1AcademyLimits
   mvc:
