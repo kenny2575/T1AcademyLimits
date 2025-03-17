@@ -9,4 +9,4 @@ public record LimitsDto (
         @JsonProperty(value = "available-limit") BigDecimal limit,
         @JsonProperty(value = "hold") BigDecimal hold
         ) {
-}
+        }

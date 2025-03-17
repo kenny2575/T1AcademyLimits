@@ -16,10 +16,10 @@ public class Limits {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
-    @Column(nullable = false, name = "limit")
-    private BigDecimal limit;
+    @Column(nullable = false, name = "amount")
+    private BigDecimal amount;
 
     @Column(nullable = false, name = "hold")
     private BigDecimal hold;
