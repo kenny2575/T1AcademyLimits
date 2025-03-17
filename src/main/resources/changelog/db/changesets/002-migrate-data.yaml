@@ -9,5 +9,5 @@ databaseChangeLog:
           dbms: postgresql
           splitStatements: false
           sql: |
-            INSERT INTO limits ("client_id", "limit", "hold")
+            INSERT INTO limits ("client_id", "amount", "hold")
             SELECT generate_series(1, 100), 10000, 0;
