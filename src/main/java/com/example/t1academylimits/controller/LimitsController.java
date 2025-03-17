@@ -48,4 +48,14 @@ public class LimitsController {
                 .body(limitsService.confirmOperation(operationId));
     }
 
+    @PostMapping("reject")
+    public ResponseEntity<OperationResultDto> rejectOperation(
+            @RequestParam("operation_id") UUID operationId
+    ) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(limitsService.rejectOperation(operationId));
+    }
+
+
 }

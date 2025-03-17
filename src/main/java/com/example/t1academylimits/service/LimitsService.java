@@ -67,4 +67,19 @@ public class LimitsService {
 
         return new OperationResultDto(operationId, limit.getClientId(), "Операция выполнена");
     }
+
+    @Transactional
+    public OperationResultDto rejectOperation(UUID operationId) {
+        var hold = holdsRepository.findByOperationId(operationId)
+                .orElseThrow(() -> new IllegalOperationIdException(operationId));
+
+        var limit = limitsRepository.findById(hold.getLimit())
+                .orElseThrow(() -> new NoSuchLimitException(hold.getLimit()));
+
+        limit.setHold(limit.getHold().subtract(hold.getAmount()));
+        holdsRepository.deleteByOperationId(operationId);
+        limitsRepository.save(limit);
+
+        return new OperationResultDto(operationId, limit.getClientId(), "Операция отменена");
+    }
 }
