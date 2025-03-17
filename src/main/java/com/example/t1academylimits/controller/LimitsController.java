@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
+import java.util.UUID;
+
 @RestController
 @RequiredArgsConstructor
 public class LimitsController {
@@ -28,9 +31,21 @@ public class LimitsController {
 
     @PostMapping("hold")
     public ResponseEntity<OperationResultDto> setHold(
-            @RequestParam("amount") Long clientId
+            @RequestParam("client_id") Long clientId,
+            @RequestParam("amount") BigDecimal amount
+            ) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(limitsService.setHold(clientId, amount));
+    }
+
+    @PostMapping("confirm")
+    public ResponseEntity<OperationResultDto> confirmOperation(
+            @RequestParam("operation_id") UUID operationId
     ) {
-        return ResponseEntity.status(HttpStatus.OK).body(null);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(limitsService.confirmOperation(operationId));
     }
 
 }

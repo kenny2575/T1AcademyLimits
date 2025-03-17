@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 import java.util.Optional;
 
 @Repository
-public interface LimitsRepository extends JpaRepository<Limits, Long> {
+public interface LimitsRepository extends JpaRepository<Limits, Integer> {
 
     @Modifying
     @Query("UPDATE Limits l SET l.amount = :newLimit WHERE l.hold <= :newLimit")
