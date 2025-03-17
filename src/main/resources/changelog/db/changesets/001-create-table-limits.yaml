@@ -1,0 +1,41 @@
+databaseChangeLog:
+  - changeSet:
+      id: 001-create_limits-table
+      author: nrr
+      preConditions:
+        - onFail: MARK_RAN  # Остановит выполнение, если условие не выполнится
+        - not:
+            tableExists:
+              tableName: limits
+      changes:
+        - createTable:
+            tableName: limits
+            columns:
+              - column:
+                  name: id
+                  type: serial
+              - column:
+                  name: amount
+                  type: numeric
+                  constraints:
+                    nullable: false
+              - column:
+                  name: hold
+                  type: numeric
+                  constraints:
+                    nullable: false
+              - column:
+                  name: client_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+        - addPrimaryKey:
+            tableName: limits
+            columnNames: id
+        - createIndex:
+            indexName: idx_unique_client_id
+            tableName: limits
+            unique: true
+            columns:
+              - column:
+                  name: client_id

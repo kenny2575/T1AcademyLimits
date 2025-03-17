@@ -1,0 +1,41 @@
+databaseChangeLog:
+  - changeSet:
+      id: 003-create_table_holds
+      author: nrr
+      preConditions:
+        - onFail: MARK_RAN  # Остановит выполнение, если условие не выполнится
+        - not:
+            tableExists:
+              tableName: holds
+      changes:
+        - createTable:
+            tableName: holds
+            columns:
+              - column:
+                  name: id
+                  type: serial
+              - column:
+                  name: amount
+                  type: numeric
+                  constraints:
+                    nullable: false
+              - column:
+                  name: limit_id
+                  type: int4
+                  constraints:
+                    nullable: false
+              - column:
+                  name: operation_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+        - addPrimaryKey:
+            tableName: holds
+            columnNames: id
+        - createIndex:
+            indexName: idx_unique_operation_id
+            tableName: holds
+            unique: true
+            columns:
+              - column:
+                  name: operation_id

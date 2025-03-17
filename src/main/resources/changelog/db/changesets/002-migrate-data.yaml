@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - changeSet:
+      author: nrr
+      id: migrate_1
+      preConditions:
+        - onFail: MARK_RAN  # Остановит выполнение, если условие не выполнится
+      changes:
+        sql:
+          dbms: postgresql
+          splitStatements: false
+          sql: |
+            INSERT INTO limits ("client_id", "amount", "hold")
+            SELECT generate_series(1, 100), 10000, 0;
